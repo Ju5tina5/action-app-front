@@ -1,8 +1,8 @@
 import React from 'react';
-import classes from "../UI/Button.module.css.module.css";
+import classes from "../UI/Button.module.css";
 
 const Button = (props) => {
-    return <div>{props.children}</div>;
+    return <button className={classes.btn} onClick={props.onClick}>{props.children}</button>;
 };
 
 export default Button;

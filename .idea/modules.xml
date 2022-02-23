@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/action-app-front.iml" filepath="$PROJECT_DIR$/.idea/action-app-front.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/auction-app-front.iml" filepath="$PROJECT_DIR$/.idea/auction-app-front.iml" />
     </modules>
   </component>
 </project>

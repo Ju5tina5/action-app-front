@@ -2,9 +2,9 @@ import React from 'react';
 
 const FooterComp = () => {
     return (
-        <div>
-            <h1>Footer</h1>
-        </div>
+        <footer className={'bar d-flex justify-center align-center'}>
+            <em>Copyright &copy; 2022. All rights reserved.</em>
+        </footer>
     );
 };
 

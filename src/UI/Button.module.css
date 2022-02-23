@@ -1,0 +1,15 @@
+.btn{
+    background: var(--secondary-color);
+    color: #F0F0F0;
+    width: 30%;
+    align-self: flex-end;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: larger;
+    cursor: pointer;
+    border: solid 1px black;
+}
+
+.btn:hover{
+    box-shadow: 0 0 1px 1px #000000;
+}
