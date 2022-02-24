@@ -1,7 +1,14 @@
-import React, {useRef} from 'react';
+import React, {useContext, useRef} from 'react';
 import Button from "../UI/Button";
+import http from "../plugins/http";
+import {useNavigate} from "react-router-dom";
+import MainContext from "../context/MainContext";
 
 const FormComponent = ({type}) => {
+
+    const { setUser} = useContext(MainContext);
+
+    const nav = useNavigate();
 
     const refs = {
         registerName: useRef(),
@@ -14,13 +21,34 @@ const FormComponent = ({type}) => {
 
     const handleRegisterForm = (e) => {
         e.preventDefault();
-        console.log('register')
-    }
 
+        const registerData = {
+            user_name: refs.registerName.current.value,
+            password: refs.passwordOne.current.value,
+            passwordTwo: refs.passwordTwo.current.value
+        }
+
+        http.post(registerData, 'register').then( res => {
+            if(res.success){
+                nav('/login')
+            }
+        })
+    }
 
     const handleLoginForm = (e) => {
       e.preventDefault();
-        console.log('Log in')
+
+      const loginData =  {
+          user_name: refs.loginName.current.value,
+          password: refs.loginPassword.current.value,
+      }
+
+      http.post(loginData, 'login').then( res => {
+          if(res.success){
+              setUser(res.user);
+              nav('/')
+          }
+      })
     }
 
 

@@ -29,21 +29,37 @@ a:hover{
   text-decoration-color: var(--decoration-color);
 }
 
+
+.miniProfile{
+  height: 50px;
+  gap: 5px;
+  padding: 5px;
+  border: solid 1px var(--decoration-color);
+  border-radius: 5px;
+}
+
+.miniProfile > img{
+  height: 100%;
+  border-radius: 50%;
+
+}
+
 form{
   background-color: rgba(240, 240, 240, 0.7);
-  width: 30%;
+  width: 35%;
   box-shadow:0 0 3px 0 var(--decoration-color);
   padding: 10px;
   border-radius: 10px;
+  font-size: 25px;
 }
 
-form > input {
+form > input, select {
+  font-size: 25px;
   background-color: rgba(124, 122, 122, 0.31);
   border: none;
   margin-bottom: 20px;
   padding: 8px;
   border-radius: 5px;
-
 }
 
 form > input:focus{
@@ -76,4 +92,11 @@ form > input:focus{
 
 .flex-wrap{
   flex-wrap: wrap;
+}
+
+.flex-grow1{
+  flex: 1;
+}
+.flex-grow3{
+  flex: 3;
 }
