@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import MainContext from "../context/MainContext";
-import MiniToolBar from "../components/MiniToolBar";
-import FullToolBar from "../components/FullToolBar";
+import MiniToolBar from "../components/NavBarComponets/MiniToolBar";
+import FullToolBar from "../components/NavBarComponets/FullToolBar";
 
 const NavBarComp = () => {
 

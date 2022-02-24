@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {BsCurrencyEuro} from 'react-icons/bs'
-import Card from "../UI/Card";
+import Card from "../../UI/Card";
 import Countdown from 'react-countdown';
-import http from "../plugins/http";
+import http from "../../plugins/http";
 
 const AuctionItem = ({item}) => {
 
@@ -11,6 +11,7 @@ const AuctionItem = ({item}) => {
             http.get(`auctionEnded/${item._id}`).then(res => {
                 console.log(res)
             })
+            return null;
         } else {
             if (minutes <= 9) {
                 minutes = '0' + minutes;

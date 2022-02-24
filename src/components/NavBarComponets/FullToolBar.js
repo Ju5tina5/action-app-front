@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
 import {AiOutlineLogout} from "react-icons/ai";
-import http from "../plugins/http";
-import MainContext from "../context/MainContext";
+import http from "../../plugins/http";
+import MainContext from "../../context/MainContext";
 import {BsCurrencyEuro} from 'react-icons/bs'
 
 const FullToolBar = () => {

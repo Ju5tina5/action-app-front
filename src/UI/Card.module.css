@@ -26,14 +26,14 @@
     box-shadow: 0 0 5px 2px var(--decoration-color);
     transform: scale(1.05);
 }
-.card img{
+.card, .card_disabled img{
     margin: 10px;
     border-radius: 10px;
     box-shadow: 0 0 2px 0 black;
     width: 35%;
 }
 
-.card > div {
+.card, .card_disabled > div {
     margin: 5px;
 }
 

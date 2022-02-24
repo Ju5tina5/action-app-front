@@ -1,5 +1,5 @@
 import React from 'react';
-import AuctionForm from "../components/AuctionForm";
+import AuctionForm from "../components/AuctionComponents/AuctionForm";
 
 const CreateAuctionPage = () => {
     return (

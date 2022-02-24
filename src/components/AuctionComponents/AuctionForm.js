@@ -1,8 +1,8 @@
 import React, {useContext, useRef} from 'react';
-import http from '../plugins/http';
-import Button from "../UI/Button";
+import http from '../../plugins/http';
+import Button from "../../UI/Button";
 import {useNavigate} from "react-router-dom";
-import MainContext from "../context/MainContext";
+import MainContext from "../../context/MainContext";
 
 const AuctionForm = () => {
 

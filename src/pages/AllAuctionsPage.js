@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import AuctionItem from "../components/AuctionItem";
+import React, {useContext, useEffect, useState} from 'react';
+import AuctionItem from "../components/AuctionComponents/AuctionItem";
 import http from "../plugins/http";
+import MainContext from "../context/MainContext";
 
 const AllAuctionsPage = () => {
 
-    const [allAuctions, setAllAuctions] = useState([]);
+    const {allAuctions, setAllAuctions} = useContext(MainContext);
 
     useEffect(   () => {
         http.get('getAuctions').then( res => {

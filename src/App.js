@@ -14,10 +14,11 @@ import UserProfilePage from "./pages/UserProfilePage";
 function App() {
 
     const [user, setUser] = useState(null);
+    const [allAuctions, setAllAuctions] = useState([]);
 
     return (
         <div className="App">
-            <MainContext.Provider value={{user, setUser}}>
+            <MainContext.Provider value={{user, setUser, allAuctions, setAllAuctions }}>
                 <NavBarComp />
                 <Routes>
                     <Route path={'/login'} element={<LoginPage/>}/>

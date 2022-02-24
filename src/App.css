@@ -66,6 +66,24 @@ form > input:focus{
   outline-color: var(--decoration-color);
 }
 
+.userCard{
+  background-color: rgba(240, 240, 240, 0.7);
+  border: solid 1px var(--decoration-color);
+  padding: 5px;
+  text-align: center;
+  min-width: 300px;
+}
+
+.userCard img{
+  width: 100%;
+  border-radius: 50%;
+}
+
+.userCard  textarea {
+  padding: 5px;
+  background-color: rgba(124, 122, 122, 0.31);
+}
+
 .d-flex{
   display: flex;
 }
@@ -97,6 +115,11 @@ form > input:focus{
 .flex-grow1{
   flex: 1;
 }
+
+.flex-grow2{
+  flex: 2;
+}
+
 .flex-grow3{
   flex: 3;
 }
