@@ -84,9 +84,19 @@ form > input:focus {
     background-color: rgba(124, 122, 122, 0.31);
 }
 
+.userInfo{
+    width: 60%;
+    height: 600px;
+}
+
+.userInfo img{
+    height: 60%;
+}
+
 .bidHistory {
     background-color: rgba(240, 240, 240, 0.7);
     text-align: center;
+    overflow-y: scroll;
 }
 
 .userAuctions {
@@ -101,6 +111,7 @@ form > input:focus {
 
 .miniAuctionItem {
     height: 200px;
+    width: 90%;
     padding: 5px;
     margin-top: 10px;
     box-shadow: 0 0 2px 0 black;
@@ -108,11 +119,12 @@ form > input:focus {
 
 .miniAuctionItem > img {
     height: 100%;
-    width: 30%;
+    width: 40%;
     margin-right: 10px;
 }
 
 .auctionBig {
+    text-align: center;
     width: 70%;
     box-shadow: 0 0 3px 0 var(--decoration-color);
     background-color: rgba(240, 240, 240, 0.7);
@@ -131,6 +143,13 @@ form > input:focus {
 
 .auctionBig span{
     color: red;
+}
+
+.bidItem{
+    padding: 5px;
+    width: 80%;
+    background-color: rgba(240, 240, 240, 0.7);
+    box-shadow: 0 0 3px 0 var(--decoration-color);
 }
 
 .d-flex {

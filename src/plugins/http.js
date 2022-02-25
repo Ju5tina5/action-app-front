@@ -24,7 +24,7 @@ const http = {
 
         const res = await fetch(`http://localhost:4000/${url}`, options);
         return await res.json();
-    }
+    },
 }
 
 export default http;

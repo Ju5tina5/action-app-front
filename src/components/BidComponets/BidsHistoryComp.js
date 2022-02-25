@@ -15,18 +15,22 @@ const BidsHistoryComp = () => {
                 nav('/login')
             }
             if(res.success){
+                console.log(res)
                 setUserBids(res.bids)
             }
         })
     }, [])
 
+    console.log(userBids)
+
 
     return (
-        <div className={'bidHistory flex-grow3'}>
+        <div className={'bidHistory d-flex flex-column align-center flex-grow3'}>
+            <h2>Bid History</h2>
             {userBids.length === 0 ?
                 <h2>No bids yet</h2>
                 :
-                userBids.map( (x, i) => <BidItem key={i} item={x}/> )
+                userBids.map( (x, i) => <BidItem key={i} title={x.auction_title} item={x.bid}/> )
             }
         </div>
     );

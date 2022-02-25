@@ -4,56 +4,39 @@ import {useNavigate} from "react-router-dom";
 import http from "../../plugins/http";
 import {BsCurrencyEuro} from "react-icons/bs";
 import Button from "../../UI/Button";
+import Countdown from "react-countdown";
 
-const AuctionItemFull = ({item}) => {
+const AuctionItemFull = ({item, setAuction}) => {
 
     const {user, setUser, setAllAuctions} = useContext(MainContext);
+
+    const [message, setMessage] = useState('');
 
     const nav = useNavigate();
 
     const amountRef = useRef();
 
-
-    const calculateTimeLeft = () => {
-        const difference = new Date(item.end_time) - Date.now();
-
-        let timeLeft = {}
-
-        if (difference > 0) {
-            timeLeft = {
-                h: Math.floor((difference / (1000 * 60 * 60)) % 24),
-                min: Math.floor((difference / 1000 / 60) % 60),
-                sec: Math.floor((difference / 1000) % 60)
-            };
+    const renderer = ({hours, minutes, seconds, completed}) => {
+        if (completed) {
+            // Render a completed state
+            return <h1>Ended</h1>;
+        } else {
+            if (hours <= 9) {
+                hours = '0' + hours;
+            }
+            if (minutes <= 9) {
+                minutes = '0' + minutes
+            }
+            if (seconds <= 9) {
+                seconds = '0' + seconds
+            }
+            // Render a countdown
+            return <span>{hours}:{minutes}:{seconds}</span>;
         }
-
-        return timeLeft
     };
 
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setTimeLeft(calculateTimeLeft());
-        }, 1000);
-        return () => clearTimeout(timer)
-    });
-
-
-    const timerComponents = [];
-
-    Object.keys(timeLeft).forEach((interval, index) => {
-        if (!timeLeft[interval]) {
-            return;
-        }
-        timerComponents.push(
-            <span key={index}>{timeLeft[interval]}{" "}{interval}{" "}</span>
-        );
-    });
-
-
     const handleCountDownCompletion = () => {
-        http.get(`auctionEnded/${item._id}`).then(res => {
+        http.get(`auctionEnded`).then(res => {
             if (res.success) {
                 setAllAuctions(res.auctions)
             }
@@ -73,13 +56,23 @@ const AuctionItemFull = ({item}) => {
                 setUser(null);
                 return nav('/login')
             }
-            console.log(res)
+            if (res.success) {
+                console.log(res)
+                setUser(res.user)
+                setAuction(res.auction)
+            }
+
+            setMessage(res.message)
+            setTimeout( () => {
+                setMessage('')
+            }, 1000 )
         })
     }
 
+
+
     return (
         <div className={'auctionBig d-flex'}>
-
             <img src={item.picture} alt=""/>
             <div className={'flex-grow2 d-flex flex-column align-center'}>
                 <div>{item.title}</div>
@@ -90,7 +83,7 @@ const AuctionItemFull = ({item}) => {
                     <div className={'d-flex flex-column'}>
                         <strong>Time left:</strong>
                         <div className={'d-flex'}>
-                            {timerComponents.length ? timerComponents : handleCountDownCompletion()}
+                            <Countdown date={item.end_time} renderer={renderer} onStop={handleCountDownCompletion}/>
                         </div>
                     </div>
                     :
@@ -98,12 +91,12 @@ const AuctionItemFull = ({item}) => {
                         <h2>Ended</h2>
                     </div>
                 }
-                {user && user.user_name !== item.owner_name &&
+                {!item.isEnded && user && user.user_name !== item.owner_name &&
                 <form onSubmit={handleBidSubmit} className={'d-flex flex-column'}>
                     <input type="number" ref={amountRef} placeholder={'Your bid'}/>
                     <Button type={'submit'}>Confirm Bid</Button>
-                </form>
-                }
+                </form>}
+                <h5 style={{color: 'red'}}>{message}</h5>
             </div>
         </div>
     );

@@ -4,6 +4,7 @@ import Card from "../../UI/Card";
 import http from "../../plugins/http";
 import MainContext from "../../context/MainContext";
 import {useNavigate} from "react-router-dom";
+import Countdown from "react-countdown";
 
 const AuctionItem = ({item}) => {
 
@@ -11,52 +12,30 @@ const AuctionItem = ({item}) => {
 
     const nav = useNavigate();
 
-    const calculateTimeLeft = () => {
-        const difference = new Date(item.end_time) - Date.now();
-
-        let timeLeft = {}
-
-        if (difference > 0) {
-            timeLeft = {
-                h: Math.floor((difference / (1000 * 60 * 60)) % 24),
-                min: Math.floor((difference / 1000 / 60) % 60),
-                sec: Math.floor((difference / 1000) % 60)
-            };
+    const renderer = ({ hours, minutes, seconds, completed }) => {
+        if (completed) {
+            return <h1>Ended</h1>;
+        } else {
+            if(hours <= 9){
+                hours = '0' + hours;
+            }
+            if(minutes <= 9){
+                minutes = '0' + minutes;
+            }
+            if(seconds <= 9){
+                seconds = '0' + seconds;
+            }
+            return <span>{hours}:{minutes}:{seconds}</span>;
         }
-
-        return timeLeft
     };
 
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setTimeLeft(calculateTimeLeft());
-        }, 1000);
-        return () => clearTimeout(timer)
-    });
-
-
-    const timerComponents = [];
-
-    Object.keys(timeLeft).forEach((interval, index) => {
-        if (!timeLeft[interval]) {
-            return;
-        }
-        timerComponents.push(
-            <span key={index}>{timeLeft[interval]}{" "}{interval}</span>
-        );
-    });
-
-
     const handleCountDownCompletion = () => {
-        http.get(`auctionEnded/${item._id}`).then(res => {
+        http.get(`auctionEnded`).then(res => {
             if (res.success) {
                 setAllAuctions(res.auctions)
             }
         });
     }
-
 
 
     const handleSingleAuctionSelection = () => {
@@ -78,7 +57,7 @@ const AuctionItem = ({item}) => {
                 <div className={'flex-grow1 d-flex flex-column'}>
                     <strong>Time left:</strong>
                     <div className={'d-flex'}>
-                        {timerComponents.length ? timerComponents : handleCountDownCompletion()}
+                        <Countdown date={item.end_time} renderer={renderer} onStop={handleCountDownCompletion}/>
                     </div>
                 </div>
                 :

@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import http from '../../plugins/http';
 import Button from "../../UI/Button";
 import {useNavigate} from "react-router-dom";
@@ -9,6 +9,8 @@ const AuctionForm = () => {
     const nav = useNavigate();
 
     const {setUser} = useContext(MainContext);
+
+    const [message, setMessage] = useState('');
 
     const refs = {
         pictureRef: useRef(),
@@ -35,11 +37,17 @@ const AuctionForm = () => {
             if(res.success){
                 nav('/')
             }
+            setMessage(res.message)
+
+            setTimeout( () => {
+                setMessage('')
+            }, 1500)
         })
     }
 
     return (
         <form onSubmit={handleNewAuctionForm} className={'d-flex flex-column'}>
+            <h2 style={{color: 'red'}}>{message}</h2>
             <input type="text" ref={refs.pictureRef} placeholder={'Picture url'}/>
             <input type="text" ref={refs.titleRef} placeholder={'Auction Title'}/>
             <input type="number" min='0' ref={refs.startPriceRef} placeholder={'Start Price'}/>
