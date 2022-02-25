@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import MainContext from "../context/MainContext";
 import Button from "../UI/Button";
 import {BsCurrencyEuro} from "react-icons/bs";
@@ -11,36 +11,46 @@ const UserCard = () => {
 
     const {user, setUser} = useContext(MainContext);
 
+
+    useEffect( () => {
+        if(!user){
+            nav('/login')
+        }
+    }, [] )
+
+
     const avatarRef = useRef();
 
     const handleAvatarUpdate = () => {
 
-        const obj =  {
+        const obj = {
             avatar: avatarRef.current.value
         };
 
-        console.log(obj)
-
-        http.post(obj, 'updateAvatar').then( res => {
-            if(res.message === 'Not logged in'){
+        http.post(obj, 'updateAvatar').then(res => {
+            if (res.message === 'Not logged in') {
                 nav('/login')
             }
-            if(res.success){
+            if (res.success) {
                 setUser(res.user)
             }
-            console.log(res)
         })
     }
 
     return (
         <div className={'userCard flex-grow2 d-flex flex-column'}>
-            <h2>{user.user_name}</h2>
-            <img src={user.avatar} alt=""/>
-            <div className={'d-flex flex-column'}>
-                <input ref={avatarRef} placeholder={"Photo url"} defaultValue={user.avatar}/>
-                <Button onClick={handleAvatarUpdate}>Update Avatar</Button>
-            </div>
-            <strong className={'d-flex align-center'}>Current Money: {user.money} <BsCurrencyEuro/></strong>
+            {user &&
+            <>
+                <h2>{user.user_name}</h2>
+                <img src={user.avatar} alt=""/>
+                <div className={'d-flex flex-column'}>
+                    <input ref={avatarRef} placeholder={"Photo url"} defaultValue={user.avatar}/>
+                    <Button onClick={handleAvatarUpdate}>Update Avatar</Button>
+                </div>
+                <strong className={'d-flex align-center'}>Current Money: {user.money} <BsCurrencyEuro/></strong>
+            </>
+            }
+
         </div>
     );
 };

@@ -1,6 +1,9 @@
 import React from 'react';
 
-const BidItem = () => {
+const BidItem = ({item}) => {
+
+    console.log(item)
+
     return (
         <div>
             <h1>Bid Item</h1>

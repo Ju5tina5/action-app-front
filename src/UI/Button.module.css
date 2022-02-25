@@ -1,11 +1,11 @@
 .btn{
     background: var(--secondary-color);
     color: #F0F0F0;
-    width: 30%;
+    min-width: 30%;
     align-self: flex-end;
     border-radius: 10px;
     padding: 5px;
-    font-size: larger;
+    font-size: large;
     cursor: pointer;
     border: solid 1px black;
 }

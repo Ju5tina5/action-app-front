@@ -1,8 +1,8 @@
 .card{
     display: flex;
-    width: 70%;
     margin: 10px;
     height: 200px;
+    width: 70%;
     border: solid 1px var(--decoration-color);
     background-color: rgba(240, 240, 240, 0.7);
     word-break: break-all;
@@ -26,7 +26,14 @@
     box-shadow: 0 0 5px 2px var(--decoration-color);
     transform: scale(1.05);
 }
-.card, .card_disabled img{
+.card_disabled img{
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 0 black;
+    width: 35%;
+}
+
+.card img{
     margin: 10px;
     border-radius: 10px;
     box-shadow: 0 0 2px 0 black;

@@ -1,33 +1,70 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {BsCurrencyEuro} from 'react-icons/bs'
 import Card from "../../UI/Card";
-import Countdown from 'react-countdown';
 import http from "../../plugins/http";
+import MainContext from "../../context/MainContext";
+import {useNavigate} from "react-router-dom";
 
 const AuctionItem = ({item}) => {
 
-    const renderer = ({hours, minutes, seconds, completed}) => {
-        if (completed) {
-            http.get(`auctionEnded/${item._id}`).then(res => {
-                console.log(res)
-            })
-            return null;
-        } else {
-            if (minutes <= 9) {
-                minutes = '0' + minutes;
-            }
-            if (hours <= 9) {
-                hours = '0' + hours;
-            }
-            if (seconds <= 9) {
-                seconds = '0' + seconds;
-            }
-            return <span>{hours}h:{minutes}min:{seconds}sec</span>
+    const {setAllAuctions} = useContext(MainContext);
+
+    const nav = useNavigate();
+
+    const calculateTimeLeft = () => {
+        const difference = new Date(item.end_time) - Date.now();
+
+        let timeLeft = {}
+
+        if (difference > 0) {
+            timeLeft = {
+                h: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                min: Math.floor((difference / 1000 / 60) % 60),
+                sec: Math.floor((difference / 1000) % 60)
+            };
         }
+
+        return timeLeft
     };
 
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setTimeLeft(calculateTimeLeft());
+        }, 1000);
+        return () => clearTimeout(timer)
+    });
+
+
+    const timerComponents = [];
+
+    Object.keys(timeLeft).forEach((interval, index) => {
+        if (!timeLeft[interval]) {
+            return;
+        }
+        timerComponents.push(
+            <span key={index}>{timeLeft[interval]}{" "}{interval}</span>
+        );
+    });
+
+
+    const handleCountDownCompletion = () => {
+        http.get(`auctionEnded/${item._id}`).then(res => {
+            if (res.success) {
+                setAllAuctions(res.auctions)
+            }
+        });
+    }
+
+
+
+    const handleSingleAuctionSelection = () => {
+        nav(`/singleAuction/${item._id}`)
+    }
+
     return (
-        <Card isEnded={item.isEnded}>
+        <Card onClick={handleSingleAuctionSelection} isEnded={item.isEnded}>
             <div className={'d-flex flex-grow3'}>
                 <img src={item.picture} alt=""/>
                 <div className={'info d-flex flex-column'}>
@@ -41,7 +78,7 @@ const AuctionItem = ({item}) => {
                 <div className={'flex-grow1 d-flex flex-column'}>
                     <strong>Time left:</strong>
                     <div className={'d-flex'}>
-                        <Countdown date={item.end_time} renderer={renderer}/>
+                        {timerComponents.length ? timerComponents : handleCountDownCompletion()}
                     </div>
                 </div>
                 :

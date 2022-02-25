@@ -6,6 +6,7 @@ const MiniToolBar = () => {
         <>
             <Link to={'/login'}>Login</Link>
             <Link to={'/register'}>Register</Link>
+            <Link to={'/'}>All Auctions</Link>
         </>
     );
 };

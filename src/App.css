@@ -1,125 +1,174 @@
-:root{
-  --main-color: #21325E;
-  --secondary-color: #3E497A;
-  --decoration-color: #F1D00A;
+:root {
+    --main-color: #21325E;
+    --secondary-color: #3E497A;
+    --decoration-color: #F1D00A;
 }
 
-.App{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 100vh;
-  justify-content: space-between;
-  background-color: rgba(124, 122, 122, 0.31);
+.App {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: space-between;
+    background-color: rgba(124, 122, 122, 0.31);
 }
 
-.bar{
-  height: 80px;
-  background: var(--main-color);
-  transition: 0.5s;
-  color: #F0F0F0;
+.bar {
+    height: 80px;
+    background: var(--main-color);
+    transition: 0.5s;
+    color: #F0F0F0;
 }
 
-a{
-  color: #F0F0F0;
-  font-size: large;
+a {
+    color: #F0F0F0;
+    font-size: large;
 }
 
-a:hover{
-  text-decoration-color: var(--decoration-color);
+a:hover {
+    text-decoration-color: var(--decoration-color);
 }
 
 
-.miniProfile{
-  height: 50px;
-  gap: 5px;
-  padding: 5px;
-  border: solid 1px var(--decoration-color);
-  border-radius: 5px;
+.miniProfile {
+    height: 50px;
+    gap: 5px;
+    padding: 5px;
+    border: solid 1px var(--decoration-color);
+    border-radius: 5px;
 }
 
-.miniProfile > img{
-  height: 100%;
-  border-radius: 50%;
+.miniProfile > img {
+    height: 100%;
+    border-radius: 50%;
 
 }
 
-form{
-  background-color: rgba(240, 240, 240, 0.7);
-  width: 35%;
-  box-shadow:0 0 3px 0 var(--decoration-color);
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 25px;
+form {
+    background-color: rgba(240, 240, 240, 0.7);
+    width: 40%;
+    box-shadow: 0 0 3px 0 var(--decoration-color);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 25px;
 }
 
 form > input, select {
-  font-size: 25px;
-  background-color: rgba(124, 122, 122, 0.31);
-  border: none;
-  margin-bottom: 20px;
-  padding: 8px;
-  border-radius: 5px;
+    font-size: 25px;
+    background-color: rgba(124, 122, 122, 0.31);
+    border: none;
+    margin-bottom: 20px;
+    padding: 8px;
+    border-radius: 5px;
 }
 
-form > input:focus{
-  outline-color: var(--decoration-color);
+form > input:focus {
+    outline-color: var(--decoration-color);
 }
 
-.userCard{
-  background-color: rgba(240, 240, 240, 0.7);
-  border: solid 1px var(--decoration-color);
-  padding: 5px;
-  text-align: center;
-  min-width: 300px;
+.userCard {
+    background-color: rgba(240, 240, 240, 0.7);
+    border: solid 1px var(--decoration-color);
+    padding: 5px;
+    text-align: center;
+    min-width: 300px;
 }
 
-.userCard img{
-  width: 100%;
-  border-radius: 50%;
+.userCard img {
+    width: 100%;
+    border-radius: 50%;
 }
 
-.userCard  textarea {
-  padding: 5px;
-  background-color: rgba(124, 122, 122, 0.31);
+.userCard textarea {
+    padding: 5px;
+    background-color: rgba(124, 122, 122, 0.31);
 }
 
-.d-flex{
-  display: flex;
+.bidHistory {
+    background-color: rgba(240, 240, 240, 0.7);
+    text-align: center;
 }
 
-.flex-column{
-  flex-direction: column;
+.userAuctions {
+    height: 500px;
+    overflow-y: scroll;
+    width: 50%;
+    border: solid 1px var(--decoration-color);
+    padding: 5px;
+    margin: 10px;
+    background-color: #F0F0F0;
 }
 
-.justify-center{
-  justify-content: center;
+.miniAuctionItem {
+    height: 200px;
+    padding: 5px;
+    margin-top: 10px;
+    box-shadow: 0 0 2px 0 black;
 }
 
-.justify-between{
-  justify-content: space-between;
+.miniAuctionItem > img {
+    height: 100%;
+    width: 30%;
+    margin-right: 10px;
 }
 
-.justify-evenly{
-  justify-content: space-evenly;
+.auctionBig {
+    width: 70%;
+    box-shadow: 0 0 3px 0 var(--decoration-color);
+    background-color: rgba(240, 240, 240, 0.7);
 }
 
-.align-center{
-  align-items: center;
+.auctionBig > img {
+    width: 50%;
+    margin: 10px;
+    border-radius: 10px;
 }
 
-.flex-wrap{
-  flex-wrap: wrap;
+.auctionBig > div {
+    margin: 10px;
+    text-align: center;
 }
 
-.flex-grow1{
-  flex: 1;
+.auctionBig span{
+    color: red;
 }
 
-.flex-grow2{
-  flex: 2;
+.d-flex {
+    display: flex;
 }
 
-.flex-grow3{
-  flex: 3;
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-evenly {
+    justify-content: space-evenly;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-grow1 {
+    flex: 1;
+}
+
+.flex-grow2 {
+    flex: 2;
+}
+
+.flex-grow3 {
+    flex: 3;
 }
