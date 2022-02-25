@@ -8,7 +8,7 @@ import Countdown from "react-countdown";
 
 const AuctionItemFull = ({item, setAuction}) => {
 
-    const {user, setUser, setAllAuctions} = useContext(MainContext);
+    const {user, setUser, setAllAuctions, socket} = useContext(MainContext);
 
     const [message, setMessage] = useState('');
 
@@ -43,6 +43,13 @@ const AuctionItemFull = ({item, setAuction}) => {
         });
     }
 
+    useEffect(() => {
+        let isMounted = true;
+        socket.on('dibAdded', (data) => {
+            if(isMounted) setAuction(data.auction)
+        })
+        return () => { isMounted = false };
+    }, []);
 
     const handleBidSubmit = (e) => {
         e.preventDefault();
@@ -57,18 +64,15 @@ const AuctionItemFull = ({item, setAuction}) => {
                 return nav('/login')
             }
             if (res.success) {
-                console.log(res)
                 setUser(res.user)
-                setAuction(res.auction)
             }
 
             setMessage(res.message)
-            setTimeout( () => {
+            setTimeout(() => {
                 setMessage('')
-            }, 1000 )
+            }, 1000)
         })
     }
-
 
 
     return (

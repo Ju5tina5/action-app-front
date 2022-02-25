@@ -7,18 +7,33 @@ import RegisterPage from "./pages/RegisterPage";
 import AllAuctionsPage from "./pages/AllAuctionsPage";
 import SingleAuctionPage from "./pages/SingleAuctionPage";
 import CreateAuctionPage from "./pages/CreateAuctionPage";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import MainContext from "./context/MainContext";
 import UserProfilePage from "./pages/UserProfilePage";
+import io from "socket.io-client";
+import http from "./plugins/http";
+
+const socket = io.connect("http://localhost:4000");
 
 function App() {
+
 
     const [user, setUser] = useState(null);
     const [allAuctions, setAllAuctions] = useState([]);
 
+
+    useEffect( () => {
+        socket.on('allAuctions', (data) => {
+            setAllAuctions([...data.sortedAuctions])
+        })
+    }, [] )
+
+
+
+
     return (
         <div className="App">
-            <MainContext.Provider value={{user, setUser, allAuctions, setAllAuctions }}>
+            <MainContext.Provider value={{user, setUser, allAuctions, setAllAuctions, socket }}>
                 <NavBarComp />
                 <Routes>
                     <Route path={'/login'} element={<LoginPage/>}/>

@@ -37,8 +37,9 @@ const AuctionForm = () => {
             if(res.success){
                 nav('/')
             }
-            setMessage(res.message)
-
+            if(!res.success){
+                setMessage(res.message)
+            }
             setTimeout( () => {
                 setMessage('')
             }, 1500)

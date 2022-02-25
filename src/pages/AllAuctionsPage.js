@@ -5,11 +5,15 @@ import MainContext from "../context/MainContext";
 
 const AllAuctionsPage = () => {
 
-    const {allAuctions, setAllAuctions} = useContext(MainContext);
+    const {allAuctions, setAllAuctions, socket} = useContext(MainContext);
 
     useEffect(   () => {
         http.get('getAuctions').then( res => {
-            setAllAuctions([...res.sortedAuctions])
+            if(res.success){
+                socket.on('allAuctions', (data) => {
+                    setAllAuctions([...data.sortedAuctions])
+                })
+            }
         })
     }, [])
 
