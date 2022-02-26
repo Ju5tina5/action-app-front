@@ -11,7 +11,7 @@ import {useEffect, useState} from "react";
 import MainContext from "./context/MainContext";
 import UserProfilePage from "./pages/UserProfilePage";
 import io from "socket.io-client";
-import http from "./plugins/http";
+
 
 const socket = io.connect("http://localhost:4000");
 
@@ -27,9 +27,6 @@ function App() {
             setAllAuctions([...data.sortedAuctions])
         })
     }, [] )
-
-
-
 
     return (
         <div className="App">

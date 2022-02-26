@@ -15,14 +15,10 @@ const BidsHistoryComp = () => {
                 nav('/login')
             }
             if(res.success){
-                console.log(res)
                 setUserBids(res.bids)
             }
         })
     }, [])
-
-    console.log(userBids)
-
 
     return (
         <div className={'bidHistory d-flex flex-column align-center flex-grow3'}>

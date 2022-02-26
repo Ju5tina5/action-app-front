@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import http from "../plugins/http";
 import AuctionItemFull from "../components/AuctionComponents/AuctionItemFull";
 import AllBidsComp from "../components/BidComponets/AllBidsComp";
@@ -9,9 +9,6 @@ const SingleAuctionPage = () => {
     const [auction, setAuction] = useState();
 
     const {id} = useParams();
-
-    const nav = useNavigate();
-
 
     useEffect( () => {
         http.get(`getSingleAuction/${id}`).then( res => {

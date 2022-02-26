@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import MainContext from "../context/MainContext";
 import MiniToolBar from "../components/NavBarComponets/MiniToolBar";
 import FullToolBar from "../components/NavBarComponets/FullToolBar";
