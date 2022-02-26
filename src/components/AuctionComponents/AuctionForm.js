@@ -39,10 +39,11 @@ const AuctionForm = () => {
             }
             if(!res.success){
                 setMessage(res.message)
+                setTimeout( () => {
+                    setMessage('')
+                }, 1500)
             }
-            setTimeout( () => {
-                setMessage('')
-            }, 1500)
+
         })
     }
 

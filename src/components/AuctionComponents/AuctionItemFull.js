@@ -18,27 +18,27 @@ const AuctionItemFull = ({item, setAuction}) => {
 
     const renderer = ({hours, minutes, seconds, completed}) => {
         if (completed) {
-            // Render a completed state
             return <h1>Ended</h1>;
         } else {
             if (hours <= 9) {
                 hours = '0' + hours;
             }
             if (minutes <= 9) {
-                minutes = '0' + minutes
+                minutes = '0' + minutes;
             }
             if (seconds <= 9) {
-                seconds = '0' + seconds
+                seconds = '0' + seconds;
             }
-            // Render a countdown
             return <span>{hours}:{minutes}:{seconds}</span>;
         }
     };
 
-    const handleCountDownCompletion = () => {
+
+    const handleCountDownStop = () => {
         http.get(`auctionEnded`).then(res => {
             if (res.success) {
-                setAllAuctions(res.auctions)
+                nav('/')
+                setAllAuctions(res.auctions);
             }
         });
     }
@@ -87,7 +87,7 @@ const AuctionItemFull = ({item, setAuction}) => {
                     <div className={'d-flex flex-column'}>
                         <strong>Time left:</strong>
                         <div className={'d-flex'}>
-                            <Countdown date={item.end_time} renderer={renderer} onStop={handleCountDownCompletion}/>
+                            <Countdown date={item.end_time} renderer={renderer} onComplete={handleCountDownStop}/>
                         </div>
                     </div>
                     :

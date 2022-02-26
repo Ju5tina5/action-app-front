@@ -29,14 +29,15 @@ const AuctionItem = ({item}) => {
         }
     };
 
-    const handleCountDownCompletion = () => {
+
+    const handleCountDownStop = () => {
         http.get(`auctionEnded`).then(res => {
             if (res.success) {
-                setAllAuctions(res.auctions)
+                nav('/')
+                setAllAuctions(res.auctions);
             }
         });
     }
-
 
     const handleSingleAuctionSelection = () => {
         nav(`/singleAuction/${item._id}`)
@@ -57,7 +58,7 @@ const AuctionItem = ({item}) => {
                 <div className={'flex-grow1 d-flex flex-column'}>
                     <strong>Time left:</strong>
                     <div className={'d-flex'}>
-                        <Countdown date={item.end_time} renderer={renderer} onStop={handleCountDownCompletion}/>
+                        <Countdown date={item.end_time} renderer={renderer} onComplete={handleCountDownStop}/>
                     </div>
                 </div>
                 :
