@@ -8,7 +8,7 @@ import Countdown from "react-countdown";
 
 const AuctionItemFull = ({item, setAuction}) => {
 
-    const {user, setUser, setAllAuctions, socket} = useContext(MainContext);
+    const {user, setUser, setAllAuctions, socket, setWonAuction} = useContext(MainContext);
 
     const [message, setMessage] = useState('');
 
@@ -38,6 +38,11 @@ const AuctionItemFull = ({item, setAuction}) => {
         http.get(`auctionEnded/${item._id}`).then(res => {
             if (res.success) {
                 nav('/')
+                let auctionWinner;
+                if(res.finishedAuction.bids.length > 0){
+                    auctionWinner = res.finishedAuction.bids[res.finishedAuction.bids.length - 1].user_name
+                }
+                if(user && auctionWinner === user.user_name) setWonAuction({isActive: true, auctionTitle: res.finishedAuction.title})
                 setAllAuctions(res.auctions);
             }
         });
