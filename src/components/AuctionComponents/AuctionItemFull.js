@@ -35,7 +35,7 @@ const AuctionItemFull = ({item, setAuction}) => {
 
 
     const handleCountDownStop = () => {
-        http.get(`auctionEnded`).then(res => {
+        http.get(`auctionEnded/${item._id}`).then(res => {
             if (res.success) {
                 nav('/')
                 setAllAuctions(res.auctions);

@@ -13,6 +13,28 @@
     background-color: rgba(124, 122, 122, 0.31);
 }
 
+.modal{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 10;
+    background: rgba(128, 128, 128, 0.4);
+    cursor: pointer;
+}
+
+.modalInfo{
+    z-index: 15;
+    margin: 10px;
+    height: 200px;
+    width: 70%;
+    border: solid 1px var(--decoration-color);
+    background-color: rgba(240, 240, 240, 0.82);
+    word-break: break-all;
+    transition: 0.5s ease-in-out;
+    cursor: default;
+}
+
+
 .bar {
     height: 80px;
     background: var(--main-color);
@@ -151,6 +173,7 @@ form > input:focus {
     background-color: rgba(240, 240, 240, 0.7);
     box-shadow: 0 0 3px 0 var(--decoration-color);
 }
+
 
 .d-flex {
     display: flex;

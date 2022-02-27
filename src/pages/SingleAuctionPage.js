@@ -13,7 +13,6 @@ const SingleAuctionPage = () => {
     useEffect( () => {
         http.get(`getSingleAuction/${id}`).then( res => {
             setAuction(res.auction)
-            console.log(res)
         })
     }, [])
 

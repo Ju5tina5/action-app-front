@@ -10,6 +10,7 @@ import CreateAuctionPage from "./pages/CreateAuctionPage";
 import {useEffect, useState} from "react";
 import MainContext from "./context/MainContext";
 import UserProfilePage from "./pages/UserProfilePage";
+import CongratsModal from "./layout/CongratsModal";
 import io from "socket.io-client";
 
 
@@ -20,6 +21,7 @@ function App() {
 
     const [user, setUser] = useState(null);
     const [allAuctions, setAllAuctions] = useState([]);
+    const [wonAuction, setWonAuction] = useState({isActive: false, auctionTitle: ''})
 
 
     useEffect( () => {
@@ -30,7 +32,8 @@ function App() {
 
     return (
         <div className="App">
-            <MainContext.Provider value={{user, setUser, allAuctions, setAllAuctions, socket }}>
+            <MainContext.Provider value={{user, setUser, allAuctions, setAllAuctions, socket, setWonAuction}}>
+                {wonAuction.isActive && <CongratsModal auction={wonAuction}/>}
                 <NavBarComp />
                 <Routes>
                     <Route path={'/login'} element={<LoginPage/>}/>

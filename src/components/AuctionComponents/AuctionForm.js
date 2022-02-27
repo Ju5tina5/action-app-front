@@ -29,7 +29,6 @@ const AuctionForm = () => {
         }
 
         http.post(auctionData, 'addNewAuction').then( res => {
-            console.log(res)
             if(res.message === 'Not logged in'){
                 setUser(null);
                 return nav('/login')
